@@ -1,0 +1,28 @@
+/* mytasks.css */
+
+#mytasks a {
+	text-decoration: none;
+}
+
+#mytasks a:hover {
+	text-decoration: underline;
+}
+
+#mytasks .mytasks-plus {
+	float: left;
+}
+
+#mytasks input[type="submit"].mytasks-refresh {
+	background-color: #DFEFFC;
+	border: none;
+}
+
+#mytasks .mytasks-refresh input[type="submit"]:hover.mytasks-refresh {
+	background-color: #DFEFFC;
+	cursor: pointer;
+	cursor: hand;
+}
+
+.mytasks-done {
+	text-decoration: line-through;
+}

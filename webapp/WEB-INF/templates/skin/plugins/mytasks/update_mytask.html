@@ -1,0 +1,32 @@
+<#include "../../../util/calendar/macro_datepicker.html" />
+<div class="span-22 prepend-1 append-1 append-bottom last">
+    <div class="portlet -lutece-border-radius">
+    	<h2>#i18n{mytasks.update_mytask.pageTitle}</h2>
+    	<form method="post" action="jsp/site/Portal.jsp?page=mytasks&amp;action=do_update_mytask">
+    		<input type="hidden" name="id_mytask" value="${mytask.idMyTask}" />
+	    	<p>
+				#i18n{mytasks.update_mytask.labelMandatoryFields}
+			</p>
+	    	<p>
+	    		<label for="mytask_date">#i18n{mytasks.update_mytask.labelDate}</label>
+	    		<br />
+	    		<input id="mytask_date" type="text" name="mytask_date" value="${mytask.date?date}" />
+	    	</p>
+	    	<p>
+	    		<label for="mytask_name">#i18n{mytasks.update_mytask.labelName}</label>
+	    		<br />
+	    		<input type="text" name="mytask_name" value="${mytask.name}" />
+	    	</p>
+	    	<p>
+	    		<a href="jsp/site/Portal.jsp?page=mytasks&amp;action=do_remove_mytask&amp;id_mytask=${mytask.idMyTask}">
+	    			<input type="button" value="#i18n{mytasks.update_mytask.buttonDelete}" />
+	    		</a>
+	    		<input type="submit" value="#i18n{mytasks.update_mytask.buttonModify}" />
+	    		<a href="jsp/site/Portal.jsp?page=mytasks">
+	    			<input type="button" value="#i18n{mytasks.update_mytask.buttonCancel}" />
+	    		</a>
+	    	</p>
+	    </form>
+    </div>
+</div>
+<@getDatePicker idField="mytask_date" language=locale />

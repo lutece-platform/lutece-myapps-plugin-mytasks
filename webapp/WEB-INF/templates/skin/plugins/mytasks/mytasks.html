@@ -1,0 +1,30 @@
+<div id="mytasks" class="span-22 prepend-1 append-1 append-bottom last">
+    <div class="portlet -lutece-border-radius">
+    	<h2>#i18n{mytasks.mytasks.pageTitle}</h2>
+    	<p>
+			<a href="jsp/site/Portal.jsp?page=mytasks&amp;action=add_mytask">
+				<span class="mytasks-plus ui-icon ui-icon-plus"></span>&nbsp;#i18n{mytasks.mytasks.labeAddMyTask}
+			</a>
+		</p>
+		<form method="post" action="jsp/site/Portal.jsp?page=mytasks&amp;action=do_change_mytasks_status">
+	    	<#list mytasks_list as mytask>
+	    		<#if mytask.isDone(  )>
+	    			<p class="mytasks-done">
+						<input type="checkbox" name="id_mytask" value="${mytask.idMyTask}" checked="checked" />
+						&nbsp;<a href="jsp/site/Portal.jsp?page=mytasks&amp;action=update_mytask&amp;id_mytask=${mytask.idMyTask}">${mytask.name}</a>
+						<br/>
+						${mytask.date?date}
+					</p>
+	    		<#else>
+	    			<p>
+						<input type="checkbox" name="id_mytask" value="${mytask.idMyTask}" />
+						&nbsp;<a href="jsp/site/Portal.jsp?page=mytasks&amp;action=update_mytask&amp;id_mytask=${mytask.idMyTask}">${mytask.name}</a>
+						<br/>
+						${mytask.date?date}
+					</p>
+	    		</#if>
+	    	</#list>
+	    	<input type="submit" class="mytasks-refresh ui-state-default ui-corner-all ui-icon ui-icon-refresh refrescar" value="#i18n{mytasks.mytasks.buttonRefresh}" />
+    	</form>
+    </div>
+</div>
