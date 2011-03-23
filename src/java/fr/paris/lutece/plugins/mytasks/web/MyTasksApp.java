@@ -76,6 +76,7 @@ public class MyTasksApp implements XPageApplication
     private static final String PARAMETER_ID_MYTASK = "id_mytask";
     private static final String PARAMETER_MYTASK_NAME = "mytask_name";
     private static final String PARAMETER_MYTASK_DATE = "mytask_date";
+    private static final String PARAMETER_MYTASK_URL_RETURN = "mytasks_url_return";
 
     // MARKS
     private static final String MARK_MYTASKS_LIST = "mytasks_list";
@@ -95,6 +96,7 @@ public class MyTasksApp implements XPageApplication
     private static final String ACTION_DO_UPDATE_MYTASK = "do_update_mytask";
     private static final String ACTION_DO_REMOVE_MYTASK = "do_remove_mytask";
     private static final String ACTION_DO_CHANGE_MYTASKS_STATUS = "do_change_mytasks_status";
+    private static final String ACTION_DO_DELETE_COMPLETED_MYTASKS = "do_delete_completed_mytasks";
 
     // MESSAGES
     private static final String MESSAGE_ERROR_DATEFORMAT = "mytasks.message.error.dateFormat";
@@ -143,6 +145,10 @@ public class MyTasksApp implements XPageApplication
             else if ( ACTION_DO_CHANGE_MYTASKS_STATUS.equals( strAction ) )
             {
                 doChangeMyTaskStatus( request );
+            }
+            else if ( ACTION_DO_DELETE_COMPLETED_MYTASKS.equals( strAction ) )
+            {
+                doDeleteCompletedMyTasks( request );
             }
         }
 
@@ -339,14 +345,46 @@ public class MyTasksApp implements XPageApplication
     /**
      * Do change the mytask ids
      * @param request {@link HttpServletRequest}
+     * @return the url return
      * @throws UserNotSignedException exception if user not connected
      */
-    private void doChangeMyTaskStatus( HttpServletRequest request )
+    public String doChangeMyTaskStatus( HttpServletRequest request )
         throws UserNotSignedException
     {
         LuteceUser user = getUser( request );
         String[] strIdsMyTask = request.getParameterValues( PARAMETER_ID_MYTASK );
         _myTasksService.doUpdateMyTasksStatus( strIdsMyTask, user );
+
+        String strUrlReturn = request.getParameter( PARAMETER_MYTASK_URL_RETURN );
+
+        if ( StringUtils.isBlank( strUrlReturn ) )
+        {
+            strUrlReturn = StringUtils.EMPTY;
+        }
+
+        return strUrlReturn;
+    }
+
+    /**
+     * Do delete the completed tasks
+     * @param request {@link HttpServletRequest}
+     * @return the url return
+     * @throws UserNotSignedException exception if user not connected
+     */
+    public String doDeleteCompletedMyTasks( HttpServletRequest request )
+        throws UserNotSignedException
+    {
+        LuteceUser user = getUser( request );
+        _myTasksService.doDeleteCompletedMyTasks( user );
+
+        String strUrlReturn = request.getParameter( PARAMETER_MYTASK_URL_RETURN );
+
+        if ( StringUtils.isBlank( strUrlReturn ) )
+        {
+            strUrlReturn = StringUtils.EMPTY;
+        }
+
+        return strUrlReturn;
     }
 
     /**

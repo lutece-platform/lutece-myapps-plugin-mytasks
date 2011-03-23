@@ -24,7 +24,6 @@
     
     <!-- Specific plugin CSS stylesheet -->
     <css-stylesheets>
-        <css-stylesheet>mytasks/jquery-ui-1.8.2.custom.css</css-stylesheet>
         <css-stylesheet>mytasks/mytasks.css</css-stylesheet>
     </css-stylesheets>
     
@@ -36,4 +35,23 @@
         </application>
     </applications>
     
+    <!-- Portlet parameters -->
+	<portlets>
+        <portlet>
+            <portlet-class>fr.paris.lutece.portal.business.portlet.PortletHome</portlet-class>
+            <portlet-type-id>MYTASKS_PORTLET</portlet-type-id>
+            <portlet-type-name>mytasks.portlet.name</portlet-type-name>
+            <portlet-creation-url>plugins/mytasks/CreatePortletMyTasks.jsp</portlet-creation-url>
+            <portlet-update-url>plugins/mytasks/ModifyPortletMyTasks.jsp</portlet-update-url>
+            <portlet-create-action-url>plugins/mytasks/DoCreatePortletMyTasks.jsp</portlet-create-action-url>
+            <portlet-modify-action-url>plugins/mytasks/DoModifyPortletMyTasks.jsp</portlet-modify-action-url>
+            
+            <portlet-create-script-template>/admin/portlet/script_create_portlet.html</portlet-create-script-template>
+            <portlet-modify-script-template>/admin/portlet/script_modify_portlet.html</portlet-modify-script-template>
+            <portlet-create-specific-template></portlet-create-specific-template>
+            <portlet-modify-specific-template></portlet-modify-specific-template>
+            <portlet-create-specific-form-template></portlet-create-specific-form-template>
+            <portlet-modify-specific-form-template></portlet-modify-specific-form-template>
+        </portlet>
+    </portlets>
 </plug-in>

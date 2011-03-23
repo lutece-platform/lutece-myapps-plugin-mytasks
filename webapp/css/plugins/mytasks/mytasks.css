@@ -8,19 +8,9 @@
 	text-decoration: underline;
 }
 
-#mytasks .mytasks-plus {
-	float: left;
-}
-
-#mytasks input[type="submit"].mytasks-refresh {
-	background-color: #DFEFFC;
-	border: none;
-}
-
-#mytasks .mytasks-refresh input[type="submit"]:hover.mytasks-refresh {
-	background-color: #DFEFFC;
-	cursor: pointer;
-	cursor: hand;
+.mytasks-plus {
+	font-weight: bold;
+	color: #449ADC;
 }
 
 .mytasks-done {

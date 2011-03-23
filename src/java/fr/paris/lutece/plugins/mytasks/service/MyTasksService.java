@@ -148,4 +148,21 @@ public final class MyTasksService
             }
         }
     }
+
+    /**
+     * Do update the mytasks status
+     * @param user a {@link LuteceUser}
+     */
+    public void doDeleteCompletedMyTasks( LuteceUser user )
+    {
+        List<MyTask> listMyTasks = getMyTasksList( user );
+
+        for ( MyTask myTask : listMyTasks )
+        {
+            if ( myTask.isDone(  ) )
+            {
+                doRemoveMyTask( myTask.getIdMyTask(  ), user );
+            }
+        }
+    }
 }
