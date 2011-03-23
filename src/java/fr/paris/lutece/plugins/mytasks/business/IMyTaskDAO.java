@@ -113,4 +113,12 @@ public interface IMyTaskDAO
      * @param plugin {@link Plugin}
      */
     void undoneMyTasks( String strUserGuid, Plugin plugin );
+
+    /**
+     * Get the nb of tasks from a given user guid
+     * @param strUserGuid the user guid
+     * @param plugin {@link Plugin}
+     * @return the nb of tasks
+     */
+    int getNbMyTasks( String strUserGuid, Plugin plugin );
 }

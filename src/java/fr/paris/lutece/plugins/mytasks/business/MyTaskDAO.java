@@ -66,6 +66,7 @@ public final class MyTaskDAO implements IMyTaskDAO
         " FROM mytasks_mytask AS a INNER JOIN mytasks_user_mytask b ON a.id_mytask = b.id_mytask WHERE b.user_guid = ? ";
     private static final String SQL_QUERY_INSERT_USER_MYTASK = " INSERT INTO mytasks_user_mytask ( user_guid, id_mytask ) VALUES ( ?, ? ) ";
     private static final String SQL_QUERY_DELETE_MYTASK_FROM_USER = " DELETE FROM mytasks_user_mytask WHERE id_mytask = ? ";
+    private static final String QSL_QUERY_COUNT_MYTASK = "SELECT COUNT(*) FROM mytasks_user_mytask WHERE user_guid = ? ";
 
     /**
      * {@inheritDoc}
@@ -233,5 +234,26 @@ public final class MyTaskDAO implements IMyTaskDAO
 
         daoUtil.executeUpdate(  );
         daoUtil.free(  );
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public int getNbMyTasks( String strUserGuid, Plugin plugin )
+    {
+        int nNbTasks = 0;
+        DAOUtil daoUtil = new DAOUtil( QSL_QUERY_COUNT_MYTASK, plugin );
+        daoUtil.setString( 1, strUserGuid );
+
+        daoUtil.executeQuery(  );
+
+        if ( daoUtil.next(  ) )
+        {
+            nNbTasks = daoUtil.getInt( 1 );
+        }
+
+        daoUtil.free(  );
+
+        return nNbTasks;
     }
 }

@@ -1,0 +1,23 @@
+<#function getName code reference_list>
+	<#if reference_list?has_content>
+		<#list reference_list as reference_item>
+			<#if reference_item.code = code>
+  				<#return reference_item.name>
+  			</#if>
+  		</#list>
+	</#if>
+	<#return "">
+</#function>
+
+<div class="highlight-box">
+	<form method="post" action="jsp/admin/plugins/mytasks/DoModifyMyTasksParameterDefaultValues.jsp">
+		<p>
+   			<label>#i18n{mytasks.advanced_parameters.labelNbMyTasksMax} : </label>
+   			<input type="text" size="2" maxlength="2" name="nb_mytasks_max" value="${getName( 'nb_mytasks_max', list_param_default_values )}" />
+		</p>
+		<br />
+		<p>
+			<input type="submit" class="button" value="#i18n{mytasks.advanced_parameters.buttonModify}" />
+		</p>
+	</form>
+</div>

@@ -165,4 +165,14 @@ public final class MyTasksService
             }
         }
     }
+
+    /**
+     * Get the nb of tasks from a given user
+     * @param user the {@link LuteceUser}
+     * @return the nb of tasks
+     */
+    public int getNbMTasks( LuteceUser user )
+    {
+        return MyTaskHome.getNbMyTasks( user.getName(  ) );
+    }
 }

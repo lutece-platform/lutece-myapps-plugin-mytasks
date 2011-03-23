@@ -4,4 +4,5 @@
     <!-- DAO -->
     <bean id="mytasks.myTaskDAO" class="fr.paris.lutece.plugins.mytasks.business.MyTaskDAO" />
     <bean id="mytasks.myTasksPortletDAO" class="fr.paris.lutece.plugins.mytasks.business.portlet.MyTasksPortletDAO" />
+    <bean id="mytasks.myTasksParameterDAO" class="fr.paris.lutece.plugins.mytasks.business.parameter.MyTasksParameterDAO" />
 </beans>

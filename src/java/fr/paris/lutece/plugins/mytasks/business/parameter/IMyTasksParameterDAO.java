@@ -31,93 +31,39 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.mytasks.business;
+package fr.paris.lutece.plugins.mytasks.business.parameter;
 
-import java.sql.Date;
+import fr.paris.lutece.portal.service.plugin.Plugin;
+import fr.paris.lutece.util.ReferenceItem;
+import fr.paris.lutece.util.ReferenceList;
 
 
 /**
  *
- * MyTask
+ * IMyTasksParameterDAO
  *
  */
-public class MyTask
+public interface IMyTasksParameterDAO
 {
-    public static final String RESOURCE_TYPE = "MYTASKS";
-    private int _nIdMyTask;
-    private String _strName;
-    private Date _date;
-    private boolean _bIsDone;
+    /**
+    * Load all the parameter default values
+    * @param plugin Plugin
+    * @return a list of ReferenceItem
+    */
+    ReferenceList selectAll( Plugin plugin );
 
     /**
-     * Returns the IdMyTask
-     * @return The IdMyTask
-     */
-    public int getIdMyTask(  )
-    {
-        return _nIdMyTask;
-    }
+    * Load the parameter value
+    * @param strParameterKey the parameter key
+    * @param plugin Plugin
+    * @return The parameter
+    */
+    ReferenceItem load( String strParameterKey, Plugin plugin );
 
     /**
-     * Sets the IdMyTask
-     * @param nIdMyTask The IdMyTask
+     * Update the parameter value
+     * @param param The parameter
+     * @param plugin Plugin
      */
-    public void setIdMyTask( int nIdMyTask )
-    {
-        _nIdMyTask = nIdMyTask;
-    }
-
-    /**
-     * Returns the Name
-     * @return The Name
-     */
-    public String getName(  )
-    {
-        return _strName;
-    }
-
-    /**
-     * Sets the Name
-     * @param strName The Name
-     */
-    public void setName( String strName )
-    {
-        _strName = strName;
-    }
-
-    /**
-     * Returns the date
-     * @return The date
-     */
-    public Date getDate(  )
-    {
-        return _date;
-    }
-
-    /**
-     * Sets the date
-     * @param date The date
-     */
-    public void setDate( Date date )
-    {
-        _date = date;
-    }
-
-    /**
-     * Set is done
-     * @param bIsDone true if the task is done, false otherwise
-     */
-    public void setDone( boolean bIsDone )
-    {
-        _bIsDone = bIsDone;
-    }
-
-    /**
-     * Check if the task is done or not
-     * @return true if the task is done, false otherwise
-     */
-    public boolean isDone(  )
-    {
-        return _bIsDone;
-    }
+    void store( ReferenceItem param, Plugin plugin );
 }

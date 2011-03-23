@@ -12,6 +12,16 @@ CREATE TABLE mytasks_mytask (
 );
 
 --
+-- Table structure for table mytasks_mytasks_parameter
+--
+DROP TABLE IF EXISTS mytasks_mytasks_parameter;
+CREATE TABLE mytasks_mytasks_parameter (
+	parameter_key varchar(100) NOT NULL,
+	parameter_value varchar(100) NOT NULL,
+	PRIMARY KEY (parameter_key)
+);
+
+--
 -- Table structure for table mytasks_user_mytask
 --
 DROP TABLE IF EXISTS mytasks_user_mytask;

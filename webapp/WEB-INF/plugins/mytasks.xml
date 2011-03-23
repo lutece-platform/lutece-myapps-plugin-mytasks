@@ -54,4 +54,12 @@
             <portlet-modify-specific-form-template></portlet-modify-specific-form-template>
         </portlet>
     </portlets>
+    
+    <!-- Admin Dashboard components -->
+    <admindashboard-components>
+    	<admindashboard-component>
+            <dashboard-component-name>myTasksAdminDashboardComponent</dashboard-component-name>
+            <dashboard-component-class>fr.paris.lutece.plugins.mytasks.web.MyTasksAdminDashboardComponent</dashboard-component-class>
+        </admindashboard-component>
+    </admindashboard-components>
 </plug-in>

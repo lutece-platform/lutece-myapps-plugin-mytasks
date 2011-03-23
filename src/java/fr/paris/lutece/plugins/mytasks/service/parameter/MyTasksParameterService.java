@@ -31,93 +31,79 @@
  *
  * License 1.0
  */
-package fr.paris.lutece.plugins.mytasks.business;
+package fr.paris.lutece.plugins.mytasks.service.parameter;
 
-import java.sql.Date;
+import fr.paris.lutece.plugins.mytasks.business.parameter.MyTasksParameterHome;
+import fr.paris.lutece.util.ReferenceItem;
+import fr.paris.lutece.util.ReferenceList;
 
 
 /**
  *
- * MyTask
+ * MyTasksParameterService
  *
  */
-public class MyTask
+public final class MyTasksParameterService
 {
-    public static final String RESOURCE_TYPE = "MYTASKS";
-    private int _nIdMyTask;
-    private String _strName;
-    private Date _date;
-    private boolean _bIsDone;
+    private static MyTasksParameterService _singleton;
 
     /**
-     * Returns the IdMyTask
-     * @return The IdMyTask
+     * Private constructor
      */
-    public int getIdMyTask(  )
+    private MyTasksParameterService(  )
     {
-        return _nIdMyTask;
     }
 
     /**
-     * Sets the IdMyTask
-     * @param nIdMyTask The IdMyTask
+     * Return the MyTasksParameterService singleton
+     *
+     * @return the MyTasksParameterService singleton
      */
-    public void setIdMyTask( int nIdMyTask )
+    public static synchronized MyTasksParameterService getInstance(  )
     {
-        _nIdMyTask = nIdMyTask;
+        if ( _singleton == null )
+        {
+            _singleton = new MyTasksParameterService(  );
+        }
+
+        return _singleton;
     }
 
     /**
-     * Returns the Name
-     * @return The Name
+     * Init
      */
-    public String getName(  )
+    public void init(  )
     {
-        return _strName;
     }
 
     /**
-     * Sets the Name
-     * @param strName The Name
+     * Load all the parameter default values
+     *
+     * @return a list of {@link ReferenceItem}
      */
-    public void setName( String strName )
+    public ReferenceList getParamDefaultValues(  )
     {
-        _strName = strName;
+        return MyTasksParameterHome.findAll(  );
     }
 
     /**
-     * Returns the date
-     * @return The date
+     * Get the parameter default value given a parameter key
+     *
+     * @param strParameterKey the parameter key
+     * @return a {@link ReferenceItem}
      */
-    public Date getDate(  )
+    public ReferenceItem getParamDefaultValue( String strParameterKey )
     {
-        return _date;
+        return MyTasksParameterHome.findByKey( strParameterKey );
     }
 
     /**
-     * Sets the date
-     * @param date The date
+     * Update the parameter
+     *
+     * @param param The parameter
      */
-    public void setDate( Date date )
+    public void update( ReferenceItem param )
     {
-        _date = date;
-    }
-
-    /**
-     * Set is done
-     * @param bIsDone true if the task is done, false otherwise
-     */
-    public void setDone( boolean bIsDone )
-    {
-        _bIsDone = bIsDone;
-    }
-
-    /**
-     * Check if the task is done or not
-     * @return true if the task is done, false otherwise
-     */
-    public boolean isDone(  )
-    {
-        return _bIsDone;
+        MyTasksParameterHome.update( param );
     }
 }

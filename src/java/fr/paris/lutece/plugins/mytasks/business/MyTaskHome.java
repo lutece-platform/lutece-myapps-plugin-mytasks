@@ -153,4 +153,14 @@ public final class MyTaskHome
     {
         _dao.undoneMyTasks( strUserGuid, _plugin );
     }
+
+    /**
+     * Get the nb of tasks from a given user guid
+     * @param strUserGuid the user guid
+     * @return the nb of tasks
+     */
+    public static int getNbMyTasks( String strUserGuid )
+    {
+        return _dao.getNbMyTasks( strUserGuid, _plugin );
+    }
 }
