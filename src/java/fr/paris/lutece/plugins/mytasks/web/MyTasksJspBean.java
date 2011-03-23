@@ -61,6 +61,9 @@ public class MyTasksJspBean extends PluginAdminPageJspBean
     // CONSTANTS
     private static final String ZERO = "0";
 
+    // PARAMETERS
+    private static final String PARAMETER_NB_MYTASKS_MAX = "nb_mytasks_max";
+
     // JSP
     private static final String JSP_ADMIN_HOME = "jsp/admin/AdminMenu.jsp";
 
@@ -85,7 +88,7 @@ public class MyTasksJspBean extends PluginAdminPageJspBean
         {
             String strParamValue = request.getParameter( param.getCode(  ) );
 
-            if ( StringUtils.isBlank( strParamValue ) )
+            if ( StringUtils.isBlank( strParamValue ) && !PARAMETER_NB_MYTASKS_MAX.equals( param.getCode(  ) ) )
             {
                 strParamValue = ZERO;
             }

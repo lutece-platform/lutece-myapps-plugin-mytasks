@@ -68,6 +68,9 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class MyTasksApp implements XPageApplication
 {
+    // CONSTANTS
+    private static final int ALL_INT = -1;
+
     // TEMPLATES
     private static final String TEMPLATE_MYTASKS_PAGE = "skin/plugins/mytasks/mytasks.html";
     private static final String TEMPLATE_ADD_MYTASK_PAGE = "skin/plugins/mytasks/add_mytask.html";
@@ -270,7 +273,7 @@ public class MyTasksApp implements XPageApplication
         {
             ReferenceItem nbTasksMax = MyTasksParameterService.getInstance(  )
                                                               .getParamDefaultValue( PARAMETER_NB_MYTASKS_MAX );
-            int nNbMyTasksMax = 10;
+            int nNbMyTasksMax = ALL_INT;
 
             if ( ( nbTasksMax != null ) && StringUtils.isNotBlank( nbTasksMax.getName(  ) ) &&
                     StringUtils.isNumeric( nbTasksMax.getName(  ) ) )
@@ -280,7 +283,7 @@ public class MyTasksApp implements XPageApplication
 
             int nNbMyTasks = _myTasksService.getNbMyTasks( user );
 
-            if ( nNbMyTasks < nNbMyTasksMax )
+            if ( ( nNbMyTasksMax == ALL_INT ) || ( nNbMyTasks < nNbMyTasksMax ) )
             {
                 Date date = DateUtil.formatDateSql( strDate, request.getLocale(  ) );
 
