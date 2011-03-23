@@ -35,7 +35,11 @@ package fr.paris.lutece.plugins.mytasks.service;
 
 import fr.paris.lutece.plugins.mytasks.business.MyTask;
 import fr.paris.lutece.plugins.mytasks.business.MyTaskHome;
+import fr.paris.lutece.portal.service.cache.AbstractCacheableService;
+import fr.paris.lutece.portal.service.cache.CacheService;
 import fr.paris.lutece.portal.service.security.LuteceUser;
+import fr.paris.lutece.portal.service.util.AppLogService;
+import fr.paris.lutece.portal.service.util.AppPropertiesService;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -47,8 +51,20 @@ import java.util.List;
  * MyTasksService
  *
  */
-public final class MyTasksService
+public final class MyTasksService extends AbstractCacheableService
 {
+    private static final String SERVICE_NAME = "MyTasks Service";
+
+    // CONSTANTS
+    private static final String TRUE = "true";
+
+    // PROPERTIES
+    private static final String PROPERTY_CACHE_MYTASKSSERVICE_ENABLE = "myportal.cache.myTasksService.enable";
+
+    // CACHES
+    private static final String CACHE_MYTASKS_LIST = "[mytasks list]";
+    private static final String CACHE_USER = "[user:";
+    private static final String CACHE_END = "]";
     private static MyTasksService _singleton;
 
     /**
@@ -56,6 +72,25 @@ public final class MyTasksService
      */
     private MyTasksService(  )
     {
+        String strCacheEnable = AppPropertiesService.getProperty( PROPERTY_CACHE_MYTASKSSERVICE_ENABLE, TRUE );
+        boolean bCacheEnable = TRUE.equalsIgnoreCase( strCacheEnable );
+
+        if ( bCacheEnable )
+        {
+            initCache( getName(  ) );
+        }
+        else
+        {
+            CacheService.registerCacheableService( this );
+        }
+    }
+
+    /**
+     * {@inheritDoc }
+     */
+    public String getName(  )
+    {
+        return SERVICE_NAME;
     }
 
     /**
@@ -80,7 +115,16 @@ public final class MyTasksService
      */
     public List<MyTask> getMyTasksList( LuteceUser user )
     {
-        return MyTaskHome.selectMyTasksListFromUser( user.getName(  ) );
+        String strKey = getMyTasksListKey( user.getName(  ) );
+        List<MyTask> listMyTasks = (List<MyTask>) getFromCache( strKey );
+
+        if ( listMyTasks == null )
+        {
+            listMyTasks = MyTaskHome.selectMyTasksListFromUser( user.getName(  ) );
+            putInCache( strKey, listMyTasks );
+        }
+
+        return listMyTasks;
     }
 
     /**
@@ -100,6 +144,7 @@ public final class MyTasksService
      */
     public void doAddMyTask( MyTask myTask, LuteceUser user )
     {
+        resetCacheFromUser( user );
         MyTaskHome.create( myTask );
         MyTaskHome.createUserMyTask( user.getName(  ), myTask.getIdMyTask(  ) );
     }
@@ -111,6 +156,7 @@ public final class MyTasksService
      */
     public void doUpdateMyTask( MyTask myTask, LuteceUser user )
     {
+        resetCacheFromUser( user );
         MyTaskHome.update( myTask );
     }
 
@@ -121,6 +167,7 @@ public final class MyTasksService
      */
     public void doRemoveMyTask( int nIdMyTask, LuteceUser user )
     {
+        resetCacheFromUser( user );
         MyTaskHome.remove( nIdMyTask );
         MyTaskHome.removeUserMyTask( nIdMyTask );
     }
@@ -132,6 +179,7 @@ public final class MyTasksService
      */
     public void doUpdateMyTasksStatus( String[] listIdsMyTask, LuteceUser user )
     {
+        resetCacheFromUser( user );
         MyTaskHome.undoneMyTasks( user.getName(  ) );
 
         if ( listIdsMyTask != null )
@@ -171,8 +219,42 @@ public final class MyTasksService
      * @param user the {@link LuteceUser}
      * @return the nb of tasks
      */
-    public int getNbMTasks( LuteceUser user )
+    public int getNbMyTasks( LuteceUser user )
     {
         return MyTaskHome.getNbMyTasks( user.getName(  ) );
+    }
+
+    /**
+     * Reset cache
+     * @param user the {@link LuteceUser}
+     */
+    private void resetCacheFromUser( LuteceUser user )
+    {
+        try
+        {
+            if ( isCacheEnable(  ) && ( getCache(  ) != null ) )
+            {
+                String strKey = getMyTasksListKey( user.getName(  ) );
+                getCache(  ).remove( strKey );
+            }
+        }
+        catch ( IllegalStateException e )
+        {
+            AppLogService.error( e.getMessage(  ), e );
+        }
+    }
+
+    /**
+     * Build the cache key for mytasks list from a given user guid
+     * @param strUserGuid the user guid
+     * @return the cache key
+     */
+    private String getMyTasksListKey( String strUserGuid )
+    {
+        StringBuilder sbKey = new StringBuilder(  );
+        sbKey.append( CACHE_MYTASKS_LIST );
+        sbKey.append( CACHE_USER + strUserGuid + CACHE_END );
+
+        return sbKey.toString(  );
     }
 }

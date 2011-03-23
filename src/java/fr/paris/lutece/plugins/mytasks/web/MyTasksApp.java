@@ -278,7 +278,7 @@ public class MyTasksApp implements XPageApplication
                 nNbMyTasksMax = Integer.parseInt( nbTasksMax.getName(  ) );
             }
 
-            int nNbMyTasks = _myTasksService.getNbMTasks( user );
+            int nNbMyTasks = _myTasksService.getNbMyTasks( user );
 
             if ( nNbMyTasks < nNbMyTasksMax )
             {

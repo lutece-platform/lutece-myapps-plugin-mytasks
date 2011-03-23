@@ -33,6 +33,8 @@
  */
 package fr.paris.lutece.plugins.mytasks.business;
 
+import java.io.Serializable;
+
 import java.sql.Date;
 
 
@@ -41,9 +43,10 @@ import java.sql.Date;
  * MyTask
  *
  */
-public class MyTask
+public class MyTask implements Serializable
 {
     public static final String RESOURCE_TYPE = "MYTASKS";
+    private static final long serialVersionUID = 9040442600076195064L;
     private int _nIdMyTask;
     private String _strName;
     private Date _date;
