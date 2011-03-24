@@ -72,17 +72,6 @@ public final class MyTasksService extends AbstractCacheableService
      */
     private MyTasksService(  )
     {
-        String strCacheEnable = AppPropertiesService.getProperty( PROPERTY_CACHE_MYTASKSSERVICE_ENABLE, TRUE );
-        boolean bCacheEnable = TRUE.equalsIgnoreCase( strCacheEnable );
-
-        if ( bCacheEnable )
-        {
-            initCache( getName(  ) );
-        }
-        else
-        {
-            CacheService.registerCacheableService( this );
-        }
     }
 
     /**
@@ -106,6 +95,24 @@ public final class MyTasksService extends AbstractCacheableService
         }
 
         return _singleton;
+    }
+
+    /**
+     * Init service
+     */
+    public void init(  )
+    {
+        String strCacheEnable = AppPropertiesService.getProperty( PROPERTY_CACHE_MYTASKSSERVICE_ENABLE, TRUE );
+        boolean bCacheEnable = TRUE.equalsIgnoreCase( strCacheEnable );
+
+        if ( bCacheEnable )
+        {
+            initCache( getName(  ) );
+        }
+        else
+        {
+            CacheService.registerCacheableService( this );
+        }
     }
 
     /**

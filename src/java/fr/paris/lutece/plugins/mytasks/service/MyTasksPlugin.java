@@ -50,5 +50,6 @@ public class MyTasksPlugin extends PluginDefaultImplementation
      */
     public void init(  )
     {
+        MyTasksService.getInstance(  ).init(  );
     }
 }
