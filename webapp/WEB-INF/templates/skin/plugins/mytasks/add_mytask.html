@@ -2,7 +2,13 @@
 <div class="span-22 prepend-1 append-1 append-bottom last">
     <div class="portlet -lutece-border-radius">
     	<h2>#i18n{mytasks.add_mytask.pageTitle}</h2>
-    	<form method="post" action="jsp/site/Portal.jsp?page=mytasks&amp;action=do_add_mytask">
+    	<#if mytasks_url_return?? && mytasks_url_return != "">
+    		<form method="post" action="jsp/site/plugins/mytasks/DoActionMyTask.jsp">
+    			<input type="hidden" name="action" value="do_add_mytask" />
+    			<input type="hidden" name="mytasks_url_return" value="${mytasks_url_return}" />
+    	<#else>
+    		<form method="post" action="jsp/site/Portal.jsp?page=mytasks&amp;action=do_add_mytask">
+    	</#if>
 	    	<p>
 				#i18n{mytasks.add_mytask.labelMandatoryFields}
 			</p>
@@ -18,7 +24,11 @@
 	    	</p>
 	    	<p>
 	    		<input type="submit" value="#i18n{mytasks.add_mytask.buttonAdd}" />
-	    		<a href="jsp/site/Portal.jsp?page=mytasks">
+	    		<#if mytasks_url_return?? && mytasks_url_return != "">
+	    			<a href="${mytasks_url_return}">
+	    		<#else>
+	    			<a href="jsp/site/Portal.jsp?page=mytasks">
+	    		</#if>
 	    			<input type="button" value="#i18n{mytasks.add_mytask.buttonCancel}" />
 	    		</a>
 	    	</p>

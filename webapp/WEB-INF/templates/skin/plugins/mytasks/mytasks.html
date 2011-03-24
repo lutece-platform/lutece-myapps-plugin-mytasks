@@ -6,7 +6,8 @@
 				<span class="mytasks-plus">+</span>&nbsp;#i18n{mytasks.mytasks.labeAddMyTask}
 			</a>
 		</p>
-		<form method="post" action="jsp/site/Portal.jsp?page=mytasks&amp;action=do_change_mytasks_status">
+		<form method="post" action="jsp/site/Portal.jsp?page=mytasks">
+			<input type="hidden" name="action" value="do_change_mytasks_status" />
 	    	<#list mytasks_list as mytask>
 	    		<#if mytask.isDone(  )>
 	    			<p>
