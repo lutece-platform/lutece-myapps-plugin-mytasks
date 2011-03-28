@@ -51,7 +51,7 @@ import javax.servlet.http.HttpServletRequest;
 
 /**
  *
- * WhatsNewPortletJspBean
+ * MyTasksPortletJspBean
  *
  */
 public class MyTasksPortletJspBean extends PortletJspBean

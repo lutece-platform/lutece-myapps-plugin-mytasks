@@ -72,7 +72,7 @@ public class MyTasksPortlet extends Portlet
     private static final String TAG_MYTASK_IS_DONE = "mytask-is-done";
 
     /**
-     * Sets the identifier of the portlet type to the value specified in the WhatsNewPortletHome class
+     * Sets the identifier of the portlet type to the value specified in the MyTasksPortletHome class
      */
     public MyTasksPortlet(  )
     {

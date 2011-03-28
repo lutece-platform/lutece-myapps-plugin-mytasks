@@ -40,7 +40,7 @@ import fr.paris.lutece.portal.business.portlet.PortletHome;
 
 /**
  *
- * WhatsNewPortletService
+ * MyTasksPortletService
  *
  */
 public class MyTasksPortletService
@@ -72,7 +72,7 @@ public class MyTasksPortletService
     /**
      * Get the portlet with the given portlet id
      * @param nPortletId the portlet id
-     * @return a {@link WhatsNewPortlet}
+     * @return a {@link MyTasksPortlet}
      */
     public MyTasksPortlet getPortlet( int nPortletId )
     {
@@ -89,8 +89,8 @@ public class MyTasksPortletService
     }
 
     /**
-     * Create a new {@link WhatsNewPortlet}
-     * @param portlet a {@link WhatsNewPortlet}
+     * Create a new {@link MyTasksPortlet}
+     * @param portlet a {@link MyTasksPortlet}
      */
     public void create( MyTasksPortlet portlet )
     {
@@ -98,8 +98,8 @@ public class MyTasksPortletService
     }
 
     /**
-     * Update a {@link WhatsNewPortlet}
-     * @param portlet a {@link WhatsNewPortlet}
+     * Update a {@link MyTasksPortlet}
+     * @param portlet a {@link MyTasksPortlet}
      */
     public void update( MyTasksPortlet portlet )
     {
@@ -107,8 +107,8 @@ public class MyTasksPortletService
     }
 
     /**
-     * Remove a {@link WhatsNewPortlet}
-     * @param portlet a {@link WhatsNewPortlet}
+     * Remove a {@link MyTasksPortlet}
+     * @param portlet a {@link MyTasksPortlet}
      */
     public void remove( MyTasksPortlet portlet )
     {

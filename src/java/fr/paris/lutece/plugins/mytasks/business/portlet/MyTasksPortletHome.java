@@ -42,7 +42,7 @@ import fr.paris.lutece.portal.service.spring.SpringContextService;
 
 /**
  *
- * WhatsNewPortletHome
+ * MyTasksPortletHome
  *
  */
 public class MyTasksPortletHome extends PortletHome
@@ -63,8 +63,8 @@ public class MyTasksPortletHome extends PortletHome
     }
 
     /**
-     * Returns the instance of the WhatsNewPortletHome singleton
-     * @return the WhatsNewPortletHome instance
+     * Returns the instance of the MyTasksPortletHome singleton
+     * @return the MyTasksPortletHome instance
      */
     public static MyTasksPortletHome getInstance(  )
     {
@@ -89,8 +89,8 @@ public class MyTasksPortletHome extends PortletHome
     }
 
     /**
-     * Returns the instance of the WhatsNewPortletDAO singleton
-     * @return the instance of the WhatsNewPortletDAO
+     * Returns the instance of the MyTasksPortletDAO singleton
+     * @return the instance of the MyTasksPortletDAO
      */
     public IPortletInterfaceDAO getDAO(  )
     {

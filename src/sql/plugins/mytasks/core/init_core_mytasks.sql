@@ -2,7 +2,7 @@
 -- Dumping data for table core_portlet_type
 --
 INSERT INTO core_portlet_type (id_portlet_type,name,url_creation,url_update,home_class,plugin_name,url_docreate,create_script,create_specific,create_specific_form,url_domodify,modify_script,modify_specific,modify_specific_form) VALUES 
-('MYTASKS_PORTLET','mytasks.portlet.name','plugins/mytasks/CreatePortletMyTasks.jsp','plugins/mytasks/ModifyPortletMyTasks.jsp','fr.paris.lutece.plugins.mytasks.business.portlet.MyTasksPortletHome','mytasks','plugins/mytasks/DoCreatePortletMyTasks.jsp','/admin/portlet/script_create_portlet.html','','','plugins/whatsnew/DoModifyPortletMyTasks.jsp','/admin/portlet/script_modify_portlet.html','','');
+('MYTASKS_PORTLET','mytasks.portlet.name','plugins/mytasks/CreatePortletMyTasks.jsp','plugins/mytasks/ModifyPortletMyTasks.jsp','fr.paris.lutece.plugins.mytasks.business.portlet.MyTasksPortletHome','mytasks','plugins/mytasks/DoCreatePortletMyTasks.jsp','/admin/portlet/script_create_portlet.html','','','plugins/mytasks/DoModifyPortletMyTasks.jsp','/admin/portlet/script_modify_portlet.html','','');
 
 --
 -- Dumping data for table core_style

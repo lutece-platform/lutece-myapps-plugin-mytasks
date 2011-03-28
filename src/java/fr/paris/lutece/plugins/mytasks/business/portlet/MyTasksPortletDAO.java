@@ -38,7 +38,7 @@ import fr.paris.lutece.portal.business.portlet.Portlet;
 
 /**
  *
- * WhatsNewPortletDAO
+ * MyTasksPortletDAO
  *
  */
 public final class MyTasksPortletDAO implements IMyTasksPortletDAO

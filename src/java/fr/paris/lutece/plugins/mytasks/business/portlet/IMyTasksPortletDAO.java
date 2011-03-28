@@ -39,7 +39,7 @@ import fr.paris.lutece.portal.business.portlet.Portlet;
 
 /**
  *
- * IWhatsNewPortletDAO
+ * IMyTasksPortletDAO
  *
  */
 public interface IMyTasksPortletDAO extends IPortletInterfaceDAO
@@ -51,7 +51,7 @@ public interface IMyTasksPortletDAO extends IPortletInterfaceDAO
     void delete( int nPortletId );
 
     /**
-     * Insert a new record in the table whatsnew_portlet
+     * Insert a new record in the table portlet
      * @param portlet the instance of the Portlet object to insert
      */
     void insert( Portlet portlet );
@@ -59,7 +59,7 @@ public interface IMyTasksPortletDAO extends IPortletInterfaceDAO
     /**
      * Loads the data of What's new Portlet whose identifier is specified in parameter
      * @param nPortletId The Portlet identifier
-     * @return the whatsNew object
+     * @return the object
      */
     Portlet load( int nPortletId );
 
