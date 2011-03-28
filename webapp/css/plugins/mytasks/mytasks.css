@@ -16,3 +16,16 @@
 .mytasks-done {
 	text-decoration: line-through;
 }
+
+#mytasks a.mytasks-button {
+	background-color: #ECE9D8;
+	border: 1px solid #81ADD7;
+	color: #5693C0;
+	cursor: default;
+	padding: 1.5px;
+}
+
+#mytasks a.mytasks-button:hover {
+	text-decoration: none;
+	background-color: #FFFFFF;
+}

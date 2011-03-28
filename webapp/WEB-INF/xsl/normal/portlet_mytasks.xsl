@@ -31,8 +31,8 @@
 			<input type="hidden" name="mytasks_url_return" value="{mytasks-url-return}" />
 	   		<xsl:apply-templates select="mytask" />
 	   		<input type="submit" value="Rafra&#238;chir" />
-	   		<a href="jsp/site/plugins/mytasks/DoActionMyTask.jsp?action=do_delete_completed_mytasks&amp;mytasks_url_return={mytasks-url-return}">
-	    		<input type="button" value="Supprimer les t&#226;ches termin&#233;es" />
+	   		<a href="jsp/site/plugins/mytasks/DoActionMyTask.jsp?action=do_delete_completed_mytasks&amp;mytasks_url_return={mytasks-url-return}" class="mytasks-button">
+	    		Supprimer les t&#226;ches termin&#233;es
 	    	</a>
 	   	</form>
 	</xsl:template>
