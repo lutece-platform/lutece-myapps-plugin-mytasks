@@ -35,6 +35,9 @@ package fr.paris.lutece.plugins.mytasks.service;
 
 import fr.paris.lutece.plugins.mytasks.business.MyTask;
 import fr.paris.lutece.plugins.mytasks.business.MyTaskHome;
+import fr.paris.lutece.plugins.mytasks.business.portlet.MyTasksPortletHome;
+import fr.paris.lutece.portal.business.portlet.Portlet;
+import fr.paris.lutece.portal.business.portlet.PortletHome;
 import fr.paris.lutece.portal.service.cache.AbstractCacheableService;
 import fr.paris.lutece.portal.service.cache.CacheService;
 import fr.paris.lutece.portal.service.security.LuteceUser;
@@ -241,6 +244,14 @@ public final class MyTasksService extends AbstractCacheableService
         {
             if ( isCacheEnable(  ) && ( getCache(  ) != null ) )
             {
+                List<Portlet> listPortlets = PortletHome.findByType( MyTasksPortletHome.getInstance(  )
+                                                                                       .getPortletTypeId(  ) );
+
+                for ( Portlet portlet : listPortlets )
+                {
+                    PortletHome.invalidate( portlet );
+                }
+
                 String strKey = getMyTasksListKey( user.getName(  ) );
                 getCache(  ).remove( strKey );
             }
