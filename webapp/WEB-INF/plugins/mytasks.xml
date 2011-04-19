@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-
 <plug-in>
-    
-    <!-- Plugin Informations --> 
+
+    <!-- Plugin Informations -->
     <name>mytasks</name>
     <class>fr.paris.lutece.plugins.mytasks.service.MyTasksPlugin</class>
     <version>1.0.0</version>
@@ -15,18 +14,19 @@
     <provider>mytasks.plugin.provider</provider>
     <provider-url>http://lutece.paris.fr</provider-url>
     <icon-url>images/admin/skin/plugins/mytasks/mytasks.png</icon-url>
-    <copyright>Copyright 2001-2010 Mairie de Paris</copyright>
+    <copyright>Copyright 2001-2011 Mairie de Paris</copyright>
     <core-version-dependency>
-		<min-core-version>2.4.3</min-core-version>
-		<max-core-version></max-core-version>	
-	</core-version-dependency>
+        <min-core-version>2.4.3</min-core-version>
+        <max-core-version></max-core-version>
+    </core-version-dependency>
     <db-pool-required>1</db-pool-required>
-    
+
     <!-- Specific plugin CSS stylesheet -->
     <css-stylesheets>
+        <css-stylesheets-scope>portal</css-stylesheets-scope>
         <css-stylesheet>mytasks/mytasks.css</css-stylesheet>
     </css-stylesheets>
-    
+
     <!-- Applications -->
     <applications>
         <application>
@@ -34,9 +34,9 @@
             <application-class>fr.paris.lutece.plugins.mytasks.web.MyTasksApp</application-class>
         </application>
     </applications>
-    
+
     <!-- Portlet parameters -->
-	<portlets>
+    <portlets>
         <portlet>
             <portlet-class>fr.paris.lutece.portal.business.portlet.PortletHome</portlet-class>
             <portlet-type-id>MYTASKS_PORTLET</portlet-type-id>
@@ -45,7 +45,7 @@
             <portlet-update-url>plugins/mytasks/ModifyPortletMyTasks.jsp</portlet-update-url>
             <portlet-create-action-url>plugins/mytasks/DoCreatePortletMyTasks.jsp</portlet-create-action-url>
             <portlet-modify-action-url>plugins/mytasks/DoModifyPortletMyTasks.jsp</portlet-modify-action-url>
-            
+
             <portlet-create-script-template>/admin/portlet/script_create_portlet.html</portlet-create-script-template>
             <portlet-modify-script-template>/admin/portlet/script_modify_portlet.html</portlet-modify-script-template>
             <portlet-create-specific-template></portlet-create-specific-template>
@@ -54,10 +54,10 @@
             <portlet-modify-specific-form-template></portlet-modify-specific-form-template>
         </portlet>
     </portlets>
-    
+
     <!-- Admin Dashboard components -->
     <admindashboard-components>
-    	<admindashboard-component>
+        <admindashboard-component>
             <dashboard-component-name>myTasksAdminDashboardComponent</dashboard-component-name>
             <dashboard-component-class>fr.paris.lutece.plugins.mytasks.web.MyTasksAdminDashboardComponent</dashboard-component-class>
         </admindashboard-component>
