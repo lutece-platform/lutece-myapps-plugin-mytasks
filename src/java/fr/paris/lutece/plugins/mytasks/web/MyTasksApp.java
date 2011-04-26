@@ -47,6 +47,7 @@ import fr.paris.lutece.portal.service.security.SecurityService;
 import fr.paris.lutece.portal.service.security.UserNotSignedException;
 import fr.paris.lutece.portal.service.template.AppTemplateService;
 import fr.paris.lutece.portal.service.util.AppPathService;
+import fr.paris.lutece.portal.service.util.AppPropertiesService;
 import fr.paris.lutece.portal.web.constants.Messages;
 import fr.paris.lutece.portal.web.xpages.XPage;
 import fr.paris.lutece.portal.web.xpages.XPageApplication;
@@ -96,6 +97,7 @@ public class MyTasksApp implements XPageApplication
     private static final String PROPERTY_PAGE_TITLE = "mytasks.mytasks.pageTitle";
     private static final String PROPERTY_ADD_MYTASK_PAGE_TITLE = "mytasks.add_mytask.pageTitle";
     private static final String PROPERTY_UPDATE_MYTASK_PAGE_TITLE = "mytasks.update_mytask.pageTitle";
+    private static final String PROPERTY_MAX_LENGTH = "mytasks.maxLength";
 
     // ACTIONS
     private static final String ACTION_ADD_MYTASK = "add_mytask";
@@ -109,6 +111,7 @@ public class MyTasksApp implements XPageApplication
     // MESSAGES
     private static final String MESSAGE_ERROR_DATEFORMAT = "mytasks.message.error.dateFormat";
     private static final String MESSAGE_NB_MYTASKS_MAX = "mytasks.message.nbMyTasksMax";
+    private static final String MESSAGE_MAX_LENGTH = "mytasks.message.maxLength";
 
     // private fields
     private MyTasksService _myTasksService = MyTasksService.getInstance(  );
@@ -318,38 +321,48 @@ public class MyTasksApp implements XPageApplication
 
         if ( StringUtils.isNotBlank( strName ) && StringUtils.isNotBlank( strDate ) )
         {
-            ReferenceItem nbTasksMax = MyTasksParameterService.getInstance(  )
-                                                              .getParamDefaultValue( PARAMETER_NB_MYTASKS_MAX );
-            int nNbMyTasksMax = ALL_INT;
+            int nMaxLength = AppPropertiesService.getPropertyInt( PROPERTY_MAX_LENGTH, 50 );
 
-            if ( ( nbTasksMax != null ) && StringUtils.isNotBlank( nbTasksMax.getName(  ) ) &&
-                    StringUtils.isNumeric( nbTasksMax.getName(  ) ) )
+            if ( strName.length(  ) < nMaxLength )
             {
-                nNbMyTasksMax = Integer.parseInt( nbTasksMax.getName(  ) );
-            }
+                ReferenceItem nbTasksMax = MyTasksParameterService.getInstance(  )
+                                                                  .getParamDefaultValue( PARAMETER_NB_MYTASKS_MAX );
+                int nNbMyTasksMax = ALL_INT;
 
-            int nNbMyTasks = _myTasksService.getNbMyTasks( user );
-
-            if ( ( nNbMyTasksMax == ALL_INT ) || ( nNbMyTasks < nNbMyTasksMax ) )
-            {
-                Date date = DateUtil.formatDateSql( strDate, request.getLocale(  ) );
-
-                if ( date != null )
+                if ( ( nbTasksMax != null ) && StringUtils.isNotBlank( nbTasksMax.getName(  ) ) &&
+                        StringUtils.isNumeric( nbTasksMax.getName(  ) ) )
                 {
-                    MyTask myTask = new MyTask(  );
-                    myTask.setName( strName );
-                    myTask.setDate( date );
-                    _myTasksService.doAddMyTask( myTask, user );
+                    nNbMyTasksMax = Integer.parseInt( nbTasksMax.getName(  ) );
+                }
+
+                int nNbMyTasks = _myTasksService.getNbMyTasks( user );
+
+                if ( ( nNbMyTasksMax == ALL_INT ) || ( nNbMyTasks < nNbMyTasksMax ) )
+                {
+                    Date date = DateUtil.formatDateSql( strDate, request.getLocale(  ) );
+
+                    if ( date != null )
+                    {
+                        MyTask myTask = new MyTask(  );
+                        myTask.setName( strName );
+                        myTask.setDate( date );
+                        _myTasksService.doAddMyTask( myTask, user );
+                    }
+                    else
+                    {
+                        SiteMessageService.setMessage( request, MESSAGE_ERROR_DATEFORMAT, SiteMessage.TYPE_ERROR );
+                    }
                 }
                 else
                 {
-                    SiteMessageService.setMessage( request, MESSAGE_ERROR_DATEFORMAT, SiteMessage.TYPE_ERROR );
+                    Object[] params = { nNbMyTasksMax };
+                    SiteMessageService.setMessage( request, MESSAGE_NB_MYTASKS_MAX, params, SiteMessage.TYPE_ERROR );
                 }
             }
             else
             {
-                Object[] params = { nNbMyTasksMax };
-                SiteMessageService.setMessage( request, MESSAGE_NB_MYTASKS_MAX, params, SiteMessage.TYPE_ERROR );
+                Object[] params = { nMaxLength };
+                SiteMessageService.setMessage( request, MESSAGE_MAX_LENGTH, params, SiteMessage.TYPE_ERROR );
             }
         }
         else
@@ -380,18 +393,28 @@ public class MyTasksApp implements XPageApplication
 
             if ( myTask != null )
             {
-                Date date = DateUtil.formatDateSql( strDate, request.getLocale(  ) );
+                int nMaxLength = AppPropertiesService.getPropertyInt( PROPERTY_MAX_LENGTH, 50 );
 
-                if ( date != null )
+                if ( strName.length(  ) < nMaxLength )
                 {
-                    myTask.setIdMyTask( nIdMyTask );
-                    myTask.setName( strName );
-                    myTask.setDate( date );
-                    _myTasksService.doUpdateMyTask( myTask, user );
+                    Date date = DateUtil.formatDateSql( strDate, request.getLocale(  ) );
+
+                    if ( date != null )
+                    {
+                        myTask.setIdMyTask( nIdMyTask );
+                        myTask.setName( strName );
+                        myTask.setDate( date );
+                        _myTasksService.doUpdateMyTask( myTask, user );
+                    }
+                    else
+                    {
+                        SiteMessageService.setMessage( request, MESSAGE_ERROR_DATEFORMAT, SiteMessage.TYPE_ERROR );
+                    }
                 }
                 else
                 {
-                    SiteMessageService.setMessage( request, MESSAGE_ERROR_DATEFORMAT, SiteMessage.TYPE_ERROR );
+                    Object[] params = { nMaxLength };
+                    SiteMessageService.setMessage( request, MESSAGE_MAX_LENGTH, params, SiteMessage.TYPE_ERROR );
                 }
             }
         }

@@ -62,7 +62,7 @@ public final class MyTasksService extends AbstractCacheableService
     private static final String TRUE = "true";
 
     // PROPERTIES
-    private static final String PROPERTY_CACHE_MYTASKSSERVICE_ENABLE = "myportal.cache.myTasksService.enable";
+    private static final String PROPERTY_CACHE_MYTASKSSERVICE_ENABLE = "mytasks.cache.myTasksService.enable";
 
     // CACHES
     private static final String CACHE_MYTASKS_LIST = "[mytasks list]";
