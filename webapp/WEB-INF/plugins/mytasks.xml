@@ -3,7 +3,7 @@
     <!-- Plugin Informations -->
     <name>mytasks</name>
     <class>fr.paris.lutece.plugins.mytasks.service.MyTasksPlugin</class>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
     <description>mytasks.plugin.description</description>
     <documentation/>
     <installation/>
