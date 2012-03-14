@@ -85,23 +85,30 @@ public class MyTasksPortlet extends Portlet
      */
     public String getXml( HttpServletRequest request )
     {
-        String strUserName;
+        String strUserName = null;
         LuteceUser user = null;
 
-        try
+        if ( request != null )
         {
-            user = SecurityService.getInstance(  ).getRemoteUser( request );
-
-            if ( user != null )
+            try
             {
-                strUserName = user.getName(  );
+                user = SecurityService.getInstance(  ).getRemoteUser( request );
+
+                if ( user != null )
+                {
+                    strUserName = user.getName(  );
+                }
+                else
+                {
+                    strUserName = StringUtils.EMPTY;
+                }
             }
-            else
+            catch ( UserNotSignedException e )
             {
                 strUserName = StringUtils.EMPTY;
             }
         }
-        catch ( UserNotSignedException e )
+        else
         {
             strUserName = StringUtils.EMPTY;
         }
