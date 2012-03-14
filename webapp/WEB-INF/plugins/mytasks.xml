@@ -61,4 +61,13 @@
             <dashboard-component-class>fr.paris.lutece.plugins.mytasks.web.MyTasksAdminDashboardComponent</dashboard-component-class>
         </admindashboard-component>
     </admindashboard-components>
+    
+    <!-- RBAC Resources -->
+    <rbac-resource-types>
+        <rbac-resource-type>
+            <rbac-resource-type-class>
+                fr.paris.lutece.plugins.mytasks.service.MyTasksResourceIdService
+			</rbac-resource-type-class>
+        </rbac-resource-type>
+    </rbac-resource-types>
 </plug-in>
