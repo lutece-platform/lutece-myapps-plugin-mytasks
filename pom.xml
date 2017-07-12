@@ -9,7 +9,7 @@
     <groupId>fr.paris.lutece.plugins</groupId>
     <artifactId>plugin-mytasks</artifactId>
     <packaging>lutece-plugin</packaging>
-    <version>1.0.1-SNAPSHOT</version>
+    <version>1.0.1</version>
     <name>Lutece MyTasks plugin</name>
     <repositories>
         <repository>
@@ -44,5 +44,6 @@
         <connection>scm:git:https://github.com/lutece-platform/lutece-myapps-plugin-mytasks.git</connection>
         <developerConnection>scm:git:https://github.com/lutece-platform/lutece-myapps-plugin-mytasks.git</developerConnection>
         <url>https://github.com/lutece-platform/lutece-myapps-plugin-mytasks.git</url>
-    </scm>
+      <tag>plugin-mytasks-1.0.1</tag>
+  </scm>
 </project>
