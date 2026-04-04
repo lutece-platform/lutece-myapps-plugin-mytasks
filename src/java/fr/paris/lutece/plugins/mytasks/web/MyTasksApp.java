@@ -46,6 +46,7 @@ import fr.paris.lutece.portal.service.security.LuteceUser;
 import fr.paris.lutece.portal.service.security.SecurityService;
 import fr.paris.lutece.portal.service.security.UserNotSignedException;
 import fr.paris.lutece.portal.service.template.AppTemplateService;
+import fr.paris.lutece.portal.service.util.AppLogService;
 import fr.paris.lutece.portal.service.util.AppPathService;
 import fr.paris.lutece.portal.service.util.AppPropertiesService;
 import fr.paris.lutece.portal.web.constants.Messages;
@@ -54,6 +55,7 @@ import fr.paris.lutece.portal.web.xpages.XPageApplication;
 import fr.paris.lutece.util.ReferenceItem;
 import fr.paris.lutece.util.date.DateUtil;
 import fr.paris.lutece.util.html.HtmlTemplate;
+import java.net.MalformedURLException;
 
 import org.apache.commons.lang.StringUtils;
 
@@ -275,6 +277,15 @@ public class MyTasksApp implements XPageApplication
         if ( StringUtils.isBlank( strUrlReturn ) )
         {
             strUrlReturn = AppPathService.getPortalUrl(  );
+        } 
+        else 
+        {
+            // Open redirect control (set baseUrl in lutece properties in case of ReverseProxy)
+            if ( !strUrlReturn.startsWith( AppPathService.getBaseUrl( request ) ) ) 
+            {
+                AppLogService.error( "WARNING : Incorrect base URL", new MalformedURLException() );
+                strUrlReturn = AppPathService.getBaseUrl( request );
+            }
         }
 
         String strAction = request.getParameter( PARAMETER_ACTION );
